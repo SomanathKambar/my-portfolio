@@ -1,0 +1,179 @@
+/* Reset + base */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1f2937;
+  background-color: #fff;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid #ddd;
+  backdrop-filter: blur(4px);
+  z-index: 50;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.nav a {
+  margin-left: 1rem;
+  font-size: 0.95rem;
+}
+
+.main-content {
+  padding: 2rem 0;
+}
+
+.footer {
+  border-top: 1px solid #ddd;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* Section styles */
+section {
+  margin: 4rem 0;
+}
+
+section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Hero */
+.hero {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+.hero-content h1 {
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+
+.hero-content p {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.hero-buttons {
+  margin-top: 1.5rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  border: 1px solid #0ea5a4;
+  font-size: 0.95rem;
+  margin-right: 0.5rem;
+}
+
+.btn-primary {
+  background: #0ea5a4;
+  color: white;
+}
+
+.btn-outline {
+  background: white;
+  color: #0ea5a4;
+}
+
+.hero img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* About */
+.about-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+.card h4 {
+  margin: 0 0 0.5rem 0;
+}
+
+/* Experience */
+.experience-item {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.experience-item .company {
+  font-weight: 600;
+}
+
+.experience-item .role {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Projects */
+.projects-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.project-card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 6px;
+  background: #fafafa;
+  transition: box-shadow 0.2s ease;
+}
+
+.project-card:hover {
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* Contact */
+.contact-links a {
+  margin-right: 1rem;
+  color: #0ea5a4;
+}

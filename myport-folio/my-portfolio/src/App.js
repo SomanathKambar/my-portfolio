@@ -1,17 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Experience from "./components/Experience";
+import Projects from "./components/Projects";
+import Contact from "./components/Contact";
+import "./css/App.css";
 
-import React from 'react';
-import Blog from './components/Blog';
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <header className="header">
+          <div className="container header-inner">
+            <div className="logo">Somanath Kambar</div>
+            <nav className="nav">
+              <a href="#about">About</a>
+              <a href="#experience">Experience</a>
+              <a href="#projects">Projects</a>
+              <a href="#contact">Contact</a>
+            </nav>
+          </div>
+        </header>
 
-function App() {
-  return (
-    <div>
-      <h1>Welcome to My Portfolio</h1>
-      <Blog />
-    </div>
-  );
+        <main className="container main-content">
+          <Hero />
+          <About />
+          <Experience />
+          <Projects />
+          <Contact />
+        </main>
+
+        <footer className="footer">
+          © {new Date().getFullYear()} Somanath Kambar — Built with React
+        </footer>
+      </div>
+    );
+  }
 }
 
 export default App;
+
 
