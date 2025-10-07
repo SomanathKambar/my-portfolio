@@ -6,7 +6,7 @@ class About extends Component {
       <section id="about">
         <h2>About</h2>
         <p>
-          Results-driven Android Developer with 6+ years of experience in Kotlin
+          Results-driven Software Engineer Developer with 6+ years of experience in Kotlin
           and Java. Proficient in mobile & Android TV development, Jetpack
           components, ExoPlayer, monetization and native integrations.
         </p>
