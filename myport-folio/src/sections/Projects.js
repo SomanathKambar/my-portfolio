@@ -13,17 +13,21 @@ const Projects = () => {
 
   // Add URLs for your projects (replace with actual URLs)
   const projectLinks = {
+     "HealthMonitorApp": {
+      demo: "https://github.com/SomanathKambar/HealthMonitorApp", // Add your demo URL
+      code: "https://github.com/SomanathKambar/HealthMonitorApp" // Add your project URL
+    },
     "VideoPlayer": {
-      demo: "#", // Add your demo URL
-      code: "https://github.com/SomanathKambar" // Add your project URL
+      demo: "https://github.com/SomanathKambar/VideoPlayer", // Add your demo URL
+      code: "https://github.com/SomanathKambar/VideoPlayer" // Add your project URL
     },
     "ChatDemoUsingGetStream": {
-      demo: "#",
-      code: "https://github.com/SomanathKambar"
+      demo: "https://github.com/SomanathKambar/DemoChatApp",
+      code: "https://github.com/SomanathKambar/DemoChatApp"
     },
     "KotlinSpringBoot": {
-      demo: "#", 
-      code: "https://github.com/SomanathKambar"
+      demo: "https://github.com/SomanathKambar/first_spring_boot_kt", 
+      code: "https://github.com/SomanathKambar/first_spring_boot_kt"
     }
   };
 
@@ -76,7 +80,7 @@ const Projects = () => {
               <div className="project-actions">
                 <a 
                   href={projectLinks[project.name]?.code || "#"} 
-                  target="_blank" 
+                  target= { project.github}  
                   rel="noopener noreferrer"
                   className="btn btn-outline btn-sm"
                 >

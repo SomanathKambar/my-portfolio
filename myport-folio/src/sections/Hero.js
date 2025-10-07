@@ -1,6 +1,11 @@
+// src/sections/Hero.js
+import React from 'react';
 import { usePortfolioData } from '../hooks/usePortfolioData';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaMedium, FaStackOverflow, FaDownload } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaMedium, FaStackOverflow, FaDownload, FaMapMarkerAlt, FaBriefcase, FaUsers, FaRocket } from 'react-icons/fa';
+import { profileImage  } from '../assets/images/profile/Somanath-kambar.jpg';
+import { image } from 'framer-motion/client';
+
 
 const Hero = () => {
   const data = usePortfolioData();
@@ -9,32 +14,42 @@ const Hero = () => {
 
   const { personalInfo } = data;
 
-  
   return (
     <section id="home" className="hero">
       <div className="container">
         <div className="hero-container">
+          {/* Left Content Section */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="hero-content"
           >
-            <motion.p
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
+              className="hero-badge"
+            >
+              <span className="badge-dot"></span>
+              Available for Full-time, Part-time & Freelance
+            </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
               className="hero-greeting"
             >
               Hi, my name is
             </motion.p>
-
+            
             <h1 className="hero-title">
               <span className="highlight">{personalInfo.name}</span>
             </h1>
-
+            
             <h2 className="hero-subtitle">{personalInfo.title}</h2>
-
+            
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -44,19 +59,26 @@ const Hero = () => {
               {personalInfo.objective}
             </motion.p>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="hero-availability"
-            >
-              {personalInfo.availability}
-            </motion.p>
-
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.8 }}
+              transition={{ delay: 0.5 }}
+              className="hero-meta"
+            >
+              <div className="meta-item">
+                <FaMapMarkerAlt className="meta-icon" />
+                <span>{personalInfo.location}</span>
+              </div>
+              <div className="meta-item">
+                <span className="status-dot"></span>
+                <span className="availability">{personalInfo.availability}</span>
+              </div>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
               className="hero-social"
             >
               <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
@@ -72,55 +94,46 @@ const Hero = () => {
                 <FaStackOverflow />
               </a>
             </motion.div>
+
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
+              transition={{ delay: 0.7 }}
               className="hero-actions"
             >
-              <div className="hero-actions">
-  <a href="#contact" className="btn btn-primary">Get In Touch</a>
-  <a href="#projects" className="btn btn-secondary">View My Work</a>
-  <button className="btn btn-outline" onClick={() => window.print()}>
-    <FaDownload /> Download Resume
-  </button>
-</div>
+              <a href="#contact" className="btn btn-primary">
+                Start a Project
+              </a>
+              <a href="#projects" className="btn btn-secondary">
+                View My Work
+              </a>
+              <button className="btn btn-outline" onClick={() => window.open('/resume.pdf', '_blank')}>
+                <FaDownload /> Download Resume
+              </button>
             </motion.div>
           </motion.div>
-
+          
+          {/* Right Profile Section */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="hero-visual"
           >
-            <div className="code-window">
-              <div className="window-header">
-                <div className="window-controls">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-              </div>
-              <div className="code-content">
-                <pre>
-{`class SomanathKambar {
-  val title = "Software Engineer"
-  val role = "Android Developer (Mobile, TV, Tablet)/ Web  "
-  val experience = "7+ years"
-  val specialization = listOf(
-    "Kotlin", "Java", "Jetpack Compose",
-    "Clean Architecture", "MVVM", "React", "React Native"
-  )
-  val availability = "Immediately"
-
-  fun buildAwesomeApps() {
-    // Creating Innovative Software Solutions
-  }
-}`}
-                </pre>
-              </div>
+            <div >
+              <img 
+                src = { require("../assets/images/profile/Somanath-kambar.jpg" ) }
+                alt="Somanath Kambar - Android Developer"
+                className="profile-image"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = '/images/profile/placeholder-avatar.jpg';
+                }}
+                loading="eager"
+              />
+              <div className="image-frame"></div>
             </div>
+            
           </motion.div>
         </div>
       </div>

@@ -11,6 +11,7 @@ const Header = () => {
   const sections = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
+    { id: 'services', label: 'Services' },
     { id: 'skills', label: 'Skills' },
     { id: 'experience', label: 'Experience' },
     { id: 'projects', label: 'Projects' },
@@ -60,7 +61,7 @@ const Header = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <span>Somanath</span>
+          <span>Somanath Kambar</span>
         </motion.div>
         <ul className="nav-links">
           {sections.map((section) => (

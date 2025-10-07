@@ -1,9 +1,9 @@
-import  { useState } from 'react';
+import React, { useState } from 'react';
 import { usePortfolioData } from '../hooks/usePortfolioData';
 import { motion } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateContactForm } from '../store/portfolioSlice';
-import { FaPhone, FaEnvelope, FaLinkedin, FaGithub, FaPaperPlane } from 'react-icons/fa';
+import { FaPhone, FaEnvelope, FaLinkedin, FaGithub, FaPaperPlane, FaCalendarAlt, FaClock } from 'react-icons/fa';
 
 const Contact = () => {
   const data = usePortfolioData();
@@ -12,10 +12,20 @@ const Contact = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [projectType, setProjectType] = useState('');
 
   if (!data) return null;
 
   const { personalInfo } = data;
+
+  const projectTypes = [
+    'Android App Development',
+    'App Migration/Modernization', 
+    'UI/UX Implementation',
+    'API Integration',
+    'Code Review',
+    'Other'
+  ];
 
   const handleInputChange = (field, value) => {
     dispatch(updateContactForm({ [field]: value }));
@@ -24,17 +34,23 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    // Simulate form submission
+    
+    // Here you would integrate with a service like EmailJS or your backend
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
-
-      // Reset form after 3 seconds
+      
       setTimeout(() => {
         setIsSubmitted(false);
-        dispatch(updateContactForm({ name: '', email: '', message: '' }));
-      }, 3000);
+        dispatch(updateContactForm({ 
+          name: '', 
+          email: '', 
+          message: '',
+          company: '',
+          budget: ''
+        }));
+        setProjectType('');
+      }, 5000);
     }, 2000);
   };
 
@@ -47,8 +63,8 @@ const Contact = () => {
           transition={{ duration: 0.8 }}
           className="section-header"
         >
-          <h2>Get In Touch</h2>
-          <p>I'm always open to discussing new opportunities and interesting projects</p>
+          <h2>Let's Work Together</h2>
+          <p>Ready to start your next project? Get in touch for a free consultation</p>
         </motion.div>
 
         <div className="contact-content">
@@ -58,23 +74,13 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             className="contact-info"
           >
-            <h3>Let's Connect</h3>
+            <h3>Start Your Project</h3>
             <p>
-              I'm currently available for new opportunities and would love to hear from you.
-              Whether you have a project in mind or just want to say hello, feel free to reach out!
+              I'm currently available for new projects and would love to discuss 
+              how we can work together to bring your ideas to life.
             </p>
 
             <div className="contact-methods">
-              <div className="contact-method">
-                <div className="contact-icon">
-                  <FaPhone />
-                </div>
-                <div className="contact-details">
-                  <h4>Phone</h4>
-                  <a href={`tel:${personalInfo.phone}`}>{personalInfo.phone}</a>
-                </div>
-              </div>
-
               <div className="contact-method">
                 <div className="contact-icon">
                   <FaEnvelope />
@@ -87,27 +93,46 @@ const Contact = () => {
 
               <div className="contact-method">
                 <div className="contact-icon">
+                  <FaPhone />
+                </div>
+                <div className="contact-details">
+                  <h4>Phone/WhatsApp</h4>
+                  <a href={`tel:${personalInfo.phone}`}>{personalInfo.phone}</a>
+                </div>
+              </div>
+
+              <div className="contact-method">
+                <div className="contact-icon">
                   <FaLinkedin />
                 </div>
                 <div className="contact-details">
                   <h4>LinkedIn</h4>
                   <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer">
-                    linkedin.com/in/somanath-kambar
+                    Connect with me
                   </a>
                 </div>
               </div>
 
               <div className="contact-method">
                 <div className="contact-icon">
-                  <FaGithub />
+                  <FaCalendarAlt />
                 </div>
                 <div className="contact-details">
-                  <h4>GitHub</h4>
-                  <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer">
-                    github.com/SomanathKambar
-                  </a>
+                  <h4>Response Time</h4>
+                  <span>Within 24 hours</span>
                 </div>
               </div>
+            </div>
+
+            <div className="freelance-info">
+              <h4>Why Work With Me?</h4>
+              <ul>
+                <li>7+ Years Android Experience</li>
+                <li>Clean, Maintainable Code</li>
+                <li>On-Time Delivery</li>
+                <li>Regular Communication</li>
+                <li>Post-Launch Support</li>
+              </ul>
             </div>
 
             <div className="availability-badge">
@@ -129,48 +154,93 @@ const Contact = () => {
                 className="success-message"
               >
                 <h3>Thank You! 🎉</h3>
-                <p>Your message has been sent successfully. I'll get back to you soon!</p>
+                <p>Your message has been sent successfully. I'll get back to you within 24 hours!</p>
               </motion.div>
             ) : (
               <form className="contact-form" onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label htmlFor="name">Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    value={contactForm.name}
-                    onChange={(e) => handleInputChange('name', e.target.value)}
-                    required
-                    placeholder="Your Name"
-                  />
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="name">Full Name *</label>
+                    <input
+                      type="text"
+                      id="name"
+                      value={contactForm.name}
+                      onChange={(e) => handleInputChange('name', e.target.value)}
+                      required
+                      placeholder="Your Name"
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="email">Email Address *</label>
+                    <input
+                      type="email"
+                      id="email"
+                      value={contactForm.email}
+                      onChange={(e) => handleInputChange('email', e.target.value)}
+                      required
+                      placeholder="your.email@example.com"
+                    />
+                  </div>
+                </div>
+
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="company">Company</label>
+                    <input
+                      type="text"
+                      id="company"
+                      value={contactForm.company}
+                      onChange={(e) => handleInputChange('company', e.target.value)}
+                      placeholder="Your Company (Optional)"
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="budget">Project Budget</label>
+                    <select
+                      id="budget"
+                      value={contactForm.budget}
+                      onChange={(e) => handleInputChange('budget', e.target.value)}
+                    >
+                      <option value="">Select Budget Range</option>
+                      <option value="<&#x20B9;5k">Less than &#x20B9; 5,000</option>
+                      <option value="&#x20B9;5k-&#x20B9;29k">&#x20B9;5,000 - &#x20B9;29,000</option>
+                      <option value="&#x20B9;30k-&#x20B9;75k">&#x20B9;30,000 - &#x20B9;75,000</option>
+                      <option value="&#x20B9;100k+">&#x20B9;1,00,000 + </option>
+                    </select>
+                  </div>
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    value={contactForm.email}
-                    onChange={(e) => handleInputChange('email', e.target.value)}
+                  <label htmlFor="projectType">Project Type *</label>
+                  <select
+                    id="projectType"
+                    value={projectType}
+                    onChange={(e) => setProjectType(e.target.value)}
                     required
-                    placeholder="your.email@example.com"
-                  />
+                  >
+                    <option value="">What type of project?</option>
+                    {projectTypes.map((type, index) => (
+                      <option key={index} value={type}>{type}</option>
+                    ))}
+                  </select>
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="message">Message</label>
+                  <label htmlFor="message">Project Details *</label>
                   <textarea
                     id="message"
-                    rows="5"
+                    rows="6"
                     value={contactForm.message}
                     onChange={(e) => handleInputChange('message', e.target.value)}
                     required
-                    placeholder="Tell me about your project or just say hello..."
+                    placeholder="Tell me about your project requirements, timeline, and any specific features you need..."
                   ></textarea>
                 </div>
 
-                <button
-                  type="submit"
+                <button 
+                  type="submit" 
                   className="btn btn-primary btn-full"
                   disabled={isSubmitting}
                 >
@@ -178,10 +248,14 @@ const Contact = () => {
                     <>Sending...</>
                   ) : (
                     <>
-                      <FaPaperPlane /> Send Message
+                      <FaPaperPlane /> Send Project Inquiry
                     </>
                   )}
                 </button>
+                
+                <p className="form-note">
+                  I typically respond within 24 hours. Your information is secure and confidential.
+                </p>
               </form>
             )}
           </motion.div>

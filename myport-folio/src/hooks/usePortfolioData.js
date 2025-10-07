@@ -5,22 +5,56 @@ export const usePortfolioData = () => {
 
   useEffect(() => {
     const portfolioData = {
-      personalInfo: {
-        name: "Somanath Kambar",
-        title: "Software Engineer (Mobile, TV, Tablet & Web Application Developer)",
-        experience: "7+ years",
-        phone: "+91 8861930437",
-        email: "somu23.sk@gmail.com",
-        availability: "Can join immediately (1-5 days)",
-        location: "India",
-        objective: "Results-driven ASoftware Engineer with over 7+ years of experience in Kotlin and Java. Proficient in mobile app development, Jetpack components, and monetization strategies. Seeking to leverage my skills in a dynamic environment while contributing to innovative projects.",
-        social: {
-          linkedin: "https://linkedin.com/in/somanath-kambar-b90537126",
-          github: "https://github.com/SomanathKambar",
-          medium: "https://medium.com/@kambarsomanath",
-          stackoverflow: "https://stackoverflow.com/users/16511914/somanath-kambar"
+       personalInfo: {
+    name: "Somanath Kambar",
+    title: "Senior Software Engineer (Android & Web)",
+    experience: "7+ years",
+    phone: "+91 8861930437",
+    email: "somu23.sk@gmail.com",
+    availability: "Available for Full-time, Part-time & Freelance projects",
+    location: "India",
+    rate: "$25-40/hour",
+    employmentTypes: ["Full-time", "Part-time", "Freelance", "Contract"],
+    stats: {
+      experience: "7+",
+      projects: "10+", 
+      apps: "10+",
+      mentored: "4+"
+    },
+    objective: "Senior Android Developer with 7+ years of experience specializing in Kotlin, Java, and modern Android development. Delivered 10+ projects and 10+ production apps with clean architecture and best practices.",
+    social: {
+      linkedin: "https://linkedin.com/in/somanath-kambar-b90537126",
+      github: "https://github.com/SomanathKambar",
+      medium: "https://medium.com/@kambarsomanath",
+      stackoverflow: "https://stackoverflow.com/users/16511914/somanath-kambar",
+    }
+  },
+       services: [ // New section for freelance services
+        {
+          title: "Android App Development",
+          description: "Custom Android applications using Kotlin, Java, and modern Android SDK",
+          icon: "📱",
+          features: ["Native Development", "Material Design", "Performance Optimization"]
+        },
+        {
+          title: "App Migration & Modernization",
+          description: "Upgrade legacy apps to modern architecture and latest Android standards",
+          icon: "🔄",
+          features: ["Java to Kotlin", "Architecture Upgrade", "SDK Updates"]
+        },
+        {
+          title: "UI/UX Implementation",
+          description: "Pixel-perfect implementation of designs with smooth animations",
+          icon: "🎨",
+          features: ["Jetpack Compose", "Custom Views", "Animation"]
+        },
+        {
+          title: "API Integration & Backend",
+          description: "Seamless integration with REST APIs, GraphQL, and backend services",
+          icon: "🔗",
+          features: ["REST APIs", "gRPC", "WebSocket", "Firebase"]
         }
-      },
+      ],
       skills: {
         programming: ["Kotlin", "Java", "OOP", "Coroutines", "Flows", "React", "React Native"],
         android: ["Mobile", "Android TV (AOSP)", "Tablet", "POS", "Web"],
@@ -111,20 +145,34 @@ export const usePortfolioData = () => {
       },
       projects: [
         {
+          name: "HealthMonitorApp",
+          description: "Comprehensive health monitoring application for tracking vital signs, hydration, and family health profiles with AI-powered recommendations",
+          tech: ["Kotlin",  "Jetpack Compose", "MVVM Architecture",   "Room Database",   "Firebase Firestore",  "WorkManager",
+                  "Hilt Dependency Injection",    "DataStore",     "Material Design 3" ],
+          github: "https://github.com/SomanathKambar/HealthMonitorApp",
+          demo:""
+        },
+        {
           name: "VideoPlayer",
           description: "Custom video player implementation with advanced controls and streaming capabilities",
-          tech: ["Kotlin", "ExoPlayer", "Media3", "Custom UI Components"]
+          tech: ["Kotlin", "ExoPlayer", "Media3", "Custom UI Components"],
+          github: "https://github.com/SomanathKambar/VideoPlayer",
+           demo:""
         },
         {
           name: "ChatDemoUsingGetStream",
           description: "Real-time chat application demo with modern UI and real-time messaging features",
-          tech: ["Kotlin", "GetStream", "WebSockets", "Material Design"]
+          tech: ["Kotlin", "GetStream", "WebSockets", "Material Design"],
+          github: "https://github.com/SomanathKambar/DemoChatApp",
+           demo:""
         },
         {
           name: "KotlinSpringBoot",
           description: "Backend development with Kotlin and Spring Boot demonstrating modern server-side development",
-          tech: ["Kotlin", "Spring Boot", "REST API", "JPA", "Security"]
-        }
+          tech: ["Kotlin", "Spring Boot", "REST API", "JPA", "Security"],
+          github: "https://github.com/SomanathKambar/first_spring_boot_kt",
+           demo:""
+        },
       ],
       upskilling: [
         "React Native for Cross-Platform Mobile App Development",
@@ -133,15 +181,6 @@ export const usePortfolioData = () => {
       ],
       certifications: [
         "React Native for Cross-Platform Mobile App Development"
-      ],
-      certifications: [
-        "React Native for Cross-Platform Mobile App Development"
-      ],
-      // Make sure upskilling array is present
-      upskilling: [
-        "React Native for Cross-Platform Mobile App Development",
-        "SpringBoot With Kotlin",
-        "KMM (Kotlin Multiplatform Mobile)"
       ]
     };
 
