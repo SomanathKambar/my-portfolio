@@ -110,7 +110,6 @@ Submitted: ${new Date().toLocaleString()}
       
     } catch (error) {
       console.error('Failed to send email:', error);
-      console.error('Failed to send email:', emailjsConfig);
       setIsSubmitting(false);
       setSubmitError('Failed to send message. Please try again or contact me directly via email.');
     }
