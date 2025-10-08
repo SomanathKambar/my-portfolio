@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@reduxjs/toolkit": "^2.9.0",
     "framer-motion": "^12.23.22",
     "lucide-react": "^0.545.0",

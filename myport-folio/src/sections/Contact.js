@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { usePortfolioData } from '../hooks/usePortfolioData';
 import { motion } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateContactForm } from '../store/portfolioSlice';
 import { FaPhone, FaEnvelope, FaLinkedin, FaGithub, FaPaperPlane, FaCalendarAlt, FaClock } from 'react-icons/fa';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const data = usePortfolioData();
@@ -13,6 +14,14 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [projectType, setProjectType] = useState('');
+  const [submitError, setSubmitError] = useState('');
+
+  // Get EmailJS configuration from environment variables
+  const emailjsConfig = {
+    serviceID: process.env.REACT_APP_EMAILJS_SERVICE_ID,
+    templateID: process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+    publicKey: process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+  };
 
   if (!data) return null;
 
@@ -34,9 +43,56 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Here you would integrate with a service like EmailJS or your backend
-    setTimeout(() => {
+    setSubmitError('');
+
+    // Validate that environment variables are set
+    if (!emailjsConfig.serviceID || !emailjsConfig.templateID || !emailjsConfig.publicKey) {
+      console.error('EmailJS configuration missing. Please check your environment variables.');
+      setSubmitError('Configuration error. Please contact the site administrator.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Combine all project details into one message for the email template
+    const combinedMessage = `
+PROJECT INQUIRY DETAILS:
+
+Name: ${contactForm.name}
+Email: ${contactForm.email}
+Company: ${contactForm.company || 'Not specified'}
+Project Budget: ${contactForm.budget || 'Not specified'}
+Project Type: ${projectType}
+
+PROJECT DESCRIPTION:
+${contactForm.message}
+
+Submitted: ${new Date().toLocaleString()}
+    `.trim();
+
+    // Prepare template parameters matching EXACTLY your template variable names
+    const templateParams = {
+      name: contactForm.name,
+      time: new Date().toLocaleString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      }),
+      message: combinedMessage
+    };
+
+    try {
+      const result = await emailjs.send(
+        emailjsConfig.serviceID, 
+        emailjsConfig.templateID, 
+        templateParams, 
+        emailjsConfig.publicKey
+      );
+      
+      console.log('Email sent successfully:', result);
+      
       setIsSubmitting(false);
       setIsSubmitted(true);
       
@@ -51,7 +107,13 @@ const Contact = () => {
         }));
         setProjectType('');
       }, 5000);
-    }, 2000);
+      
+    } catch (error) {
+      console.error('Failed to send email:', error);
+      console.error('Failed to send email:', emailjsConfig);
+      setIsSubmitting(false);
+      setSubmitError('Failed to send message. Please try again or contact me directly via email.');
+    }
   };
 
   return (
@@ -158,6 +220,16 @@ const Contact = () => {
               </motion.div>
             ) : (
               <form className="contact-form" onSubmit={handleSubmit}>
+                {submitError && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="error-message"
+                  >
+                    {submitError}
+                  </motion.div>
+                )}
+                
                 <div className="form-row">
                   <div className="form-group">
                     <label htmlFor="name">Full Name *</label>
@@ -204,10 +276,10 @@ const Contact = () => {
                       onChange={(e) => handleInputChange('budget', e.target.value)}
                     >
                       <option value="">Select Budget Range</option>
-                      <option value="<&#x20B9;5k">Less than &#x20B9; 5,000</option>
-                      <option value="&#x20B9;5k-&#x20B9;29k">&#x20B9;5,000 - &#x20B9;29,000</option>
-                      <option value="&#x20B9;30k-&#x20B9;75k">&#x20B9;30,000 - &#x20B9;75,000</option>
-                      <option value="&#x20B9;100k+">&#x20B9;1,00,000 + </option>
+                      <option value="<₹5k">Less than ₹ 5,000</option>
+                      <option value="₹5k-₹29k">₹5,000 - ₹29,000</option>
+                      <option value="₹30k-₹75k">₹30,000 - ₹75,000</option>
+                      <option value="₹100k+">₹1,00,000 + </option>
                     </select>
                   </div>
                 </div>
