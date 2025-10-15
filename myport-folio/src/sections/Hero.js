@@ -9,6 +9,10 @@ import { image } from 'framer-motion/client';
 
 const Hero = () => {
   const data = usePortfolioData();
+  const downloadFile = () => {
+    window.location.href =
+      "https://drive.google.com/uc?export=download&id=1AGCNX0WvFPCUS1qmR9JzTpszD5zSlHD5";
+  };
 
   if (!data) return null;
 
@@ -43,13 +47,13 @@ const Hero = () => {
             >
               Hi, my name is
             </motion.p>
-            
+
             <h1 className="hero-title">
               <span className="highlight">{personalInfo.name}</span>
             </h1>
-            
+
             <h2 className="hero-subtitle">{personalInfo.title}</h2>
-            
+
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -71,26 +75,48 @@ const Hero = () => {
               </div>
               <div className="meta-item">
                 <span className="status-dot"></span>
-                <span className="availability">{personalInfo.availability}</span>
+                <span className="availability">
+                  {personalInfo.availability}
+                </span>
               </div>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
               className="hero-social"
             >
-              <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <a
+                href={personalInfo.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+              >
                 <FaLinkedin />
               </a>
-              <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <a
+                href={personalInfo.social.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+              >
                 <FaGithub />
               </a>
-              <a href={personalInfo.social.medium} target="_blank" rel="noopener noreferrer" aria-label="Medium">
+              <a
+                href={personalInfo.social.medium}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Medium"
+              >
                 <FaMedium />
               </a>
-              <a href={personalInfo.social.stackoverflow} target="_blank" rel="noopener noreferrer" aria-label="StackOverflow">
+              <a
+                href={personalInfo.social.stackoverflow}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="StackOverflow"
+              >
                 <FaStackOverflow />
               </a>
             </motion.div>
@@ -107,12 +133,12 @@ const Hero = () => {
               <a href="#projects" className="btn btn-secondary">
                 View My Work
               </a>
-              <button className="btn btn-outline" onClick={() => window.open('/resume.pdf', '_blank')}>
+              <button className="btn btn-outline" onClick={downloadFile}>
                 <FaDownload /> Download Resume
               </button>
             </motion.div>
           </motion.div>
-          
+
           {/* Right Profile Section */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -120,9 +146,9 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="hero-visual"
           >
-            <div >
-              <img 
-                src = { require("../assets/images/profile/Somanath-kambar.jpg" ) }
+            <div>
+              <img
+                src={require("../assets/images/profile/Somanath-kambar.jpg")}
                 alt="Somanath Kambar - Android Developer"
                 className="profile-image"
                 onError={(e) => {
@@ -133,7 +159,6 @@ const Hero = () => {
               />
               <div className="image-frame"></div>
             </div>
-            
           </motion.div>
         </div>
       </div>
